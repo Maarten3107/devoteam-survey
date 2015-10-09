@@ -1,0 +1,14 @@
+
+<div class="field row">
+    <div class="form-group">
+
+        <div class="radio" ng-repeat="option in field.field_options">
+          <label>
+             <input type="radio" value="{{option.option_value}}" ng-model="field.field_value"  ng-required="field.field_required" ng-disabled="field.field_disabled"/>{{option.option_title}}
+          </label>
+        </div>
+        <span class="required-error" ng-show="field.field_required && !field.field_value">* required</span>
+
+
+    </div>
+</div>

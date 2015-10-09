@@ -1,0 +1,24 @@
+
+
+<div class="table-responsive">
+  <table class="table table-bordered" ng-controller="MainCtrl">
+  	<thead>
+    <tr>
+    	<th>Name</th>
+    	<th>Description</th>
+    	<th>Actions</th>
+    </tr>
+	</thead>
+	<tbody ng-repeat="form in forms">
+		<tr>
+			<td>{{form.form_name}}</td>
+			<td>{{form.form_description}}</td>
+			<td><a href="/#/invite/{{form._id}}" class="btn btn-success btn-xs">Invite users</a> 
+				<button class="btn btn-success btn-xs" ng-click="view(form)">View Form</button> 
+				<button class="btn btn-warning btn-xs" disabled="disabled">edit</button> 
+				<button class="btn btn-danger btn-xs" disabled="disabled">remove</button> </td>
+		</tr>
+		
+	</tbody>
+  </table>
+</div>

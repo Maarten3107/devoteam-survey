@@ -1,0 +1,168 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+
+        <h2>Create a new form</h2>
+   
+        
+    <div class="form-fields" ng-hide="">
+        <div class="form-properties">
+           
+            <div class="row">
+                <div class="col-sm-12">
+                     <div class="form-group">
+                        <label for="exampleInputEmail1">Form Name:</label>
+                        <input type="text" name="form-name" class="form-control" ng-model="form.form_name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Form Description:</label>
+                        <textarea type="text" name="form-name" class="form-control" ng-model="form.form_description"></textarea>
+                    </div>
+
+                  
+
+                    <div class="form-group">
+                        <label for="">Fields</label>
+                        <select class="form-control" ng-model="addField.new" ng-options="type.name as type.value for type in addField.types"></select>
+                        <br>
+
+                    </div>
+                    <div class="btn-toolbar" role="toolbar" aria-label="...">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="submit" class="btn" ng-click="addNewField()"><i class="icon-plus"></i> Add Field</button>
+                        </div>
+                         <div class="btn-group" role="group" aria-label="...">
+                             <button class="btn btn-primary right" type="button" ng-click="previewOn()"><i class="icon-eye-open icon-white"></i> Preview Form</button>
+           
+                         </div>
+
+                        <div class="btn-group" role="group" aria-label="...">
+                             <button class="btn btn-success right" type="button" ng-disabled="" ng-click="submit()"><i class="icon-edit icon-white"></i> Save</button>
+                         </div>
+
+                          <div class="btn-group" role="group" aria-label="...">
+                            <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Reset</button>
+                        </div>
+
+                       
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+        <br>
+        <p ng-show="form.form_fields.length == 0">No fields added yet.</p>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default" ng-repeat="field in form.form_fields">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{field.field_id}}" aria-expanded="true" aria-controls="collapseOne">
+                     {{field.field_title}}
+                    </a>
+                  </h4>
+                </div>
+                <div id="{{field.field_id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+
+                    <div class="accordion-edit">
+                    
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button class="btn btn-danger pull-right" type="button" ng-click="deleteField(field.field_id)"><i class="icon-trash icon-white"></i> Delete</button>
+                            Field Type: {{field.field_type}}
+                    </div>
+                       
+                    </div>
+
+                    <div class="clear"></div> <hr>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                        <label>Field Title:</label>
+                        <input type="text" class="form-control" ng-model="field.field_title" value="{{field.field_title}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Field Default Value:</label>
+                             <input  class="form-control"type="text" ng-model="field.field_value" value="{{field.field_value}}">
+                        </div>
+                    </div>
+
+                   
+                    <div class="row" ng-show="showAddOptions(field)">
+                        <div class="span2">Field Options:</div>
+                        <div class="span6">
+                            <div ng-repeat="option in field.field_options">
+                                <input type="text" ng-model="option.option_title" value="{{option.option_title}}">
+                                <a class="btn btn-danger btn-mini right" type="button" ng-click="deleteOption(field, option)"><i class="icon-minus icon-white"></i></a>
+                                <span class="label label-inverse">Value: {{ option.option_value }}</span>
+                            </div>
+                            <button class="btn btn-primary btn-small" type="button" ng-click="addOption(field)"><i class="icon-plus icon-white"></i> Add Option</button>
+                        </div>
+                    </div>
+
+                    <div class="clear"></div> <hr>
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label>Required:</label>
+                            <label>
+                                <input type="radio" ng-value="true" ng-selected ng-model="field.field_required"/>
+                                &nbsp; Yes
+                            </label>
+                            <label>
+                                <input type="radio" ng-value="false" ng-model="field.field_required"/>
+                                &nbsp; No
+                            </label>
+                        </div>
+        
+                    
+                        <div class="col-xs-6">
+                        <label>Disabled:</label>
+                       
+                            <label>
+                                <input type="radio" ng-value="true" ng-selected ng-model="field.field_disabled"/>
+                                &nbsp; Yes
+                            </label>
+                            <label>
+                                <input type="radio" ng-value="false" ng-model="field.field_disabled"/>
+                                &nbsp; No
+                            </label>
+                       
+                        </div>
+                    </div>
+                </div>
+                   
+                  </div>
+                </div>
+              </div>
+       
+
+        <div ng-show="showJson">
+            <h4>Form object content:</h4>
+            <pre>{{ form | json }}</pre>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+        <h2>Preview</h2>
+
+           <div class="form-fields-preview">
+                <form-directive form="previewForm"></form-directive>
+            </div>
+
+    </div>
+</div>
+
+
+
+
+ 
+</div>
+
