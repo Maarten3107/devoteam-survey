@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var http = require('http');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var routes = require('./routes/index');
@@ -71,8 +72,7 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 
-app.set('port', process.env.PORT || 1337);
+app.set('port', process.env.PORT || 80);
 
-var server = app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + server.address().port);
-});
+
+http.createServer(app).listen(80);
